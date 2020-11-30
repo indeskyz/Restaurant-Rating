@@ -6,8 +6,7 @@
  * @flow strict-local
  */
 
-
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -17,54 +16,40 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
-  Button
+  Button,
 } from 'react-native';
 
+import {HomeScreen} from './components/HomeScreen';
+import {AboutScreen} from './components/About';
 
+import {MyPlaces} from './components/MyPlaces';
 
-import { HomeScreen } from './components/HomeScreen'
-import { AboutScreen } from './components/About'
-import { DetailScreen } from './components/DetailScreen'
-import { MyPlaces } from './components/MyPlaces'
-
-
-
-import {NavigationContainer} from '@react-navigation/native'
-import {createDrawerNavigator} from '@react-navigation/drawer'
-
+import {NavigationContainer} from '@react-navigation/native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {Details} from './components/Details';
 
 const NavComponent = createDrawerNavigator();
-
 
 const App: () => React$Node = () => {
   return (
     <>
       <NavigationContainer>
         <NavComponent.Navigator>
-        <NavComponent.Screen
+          <NavComponent.Screen
             name="Home"
             component={HomeScreen}
-            options={{title:'Home'}}
-            />
+            options={{title: 'Home'}}
+          />
 
-        <NavComponent.Screen
-            name="About"
-            component={AboutScreen}
-            />
+          <NavComponent.Screen name="About" component={AboutScreen} />
 
-       
+          <NavComponent.Screen name="My Places" component={MyPlaces}  />
 
-        <NavComponent.Screen
-            name="My Places"
-            component={MyPlaces}
-            />
-
-        
-       </NavComponent.Navigator>
+          <NavComponent.Screen name="Details" component={Details} />
+        </NavComponent.Navigator>
       </NavigationContainer>
     </>
   );
 };
-
 
 export default App;

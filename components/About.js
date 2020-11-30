@@ -27,7 +27,7 @@ const AboutScreen = ({navigation}) =>{
         </TouchableOpacity>
       </View>
       
-      <View>
+      <View style={styles.aboutMe}>
       <Text style={styles.info}>@tannerr.io</Text>
         <Text style={styles.title}>About</Text>
         <Text style={styles.name}>Tanner Rizopoulos</Text>
@@ -45,12 +45,12 @@ const AboutScreen = ({navigation}) =>{
 const styles = StyleSheet.create({
   container: {
     
-    backgroundColor: 'white',
+    backgroundColor: '#454b66',
     alignItems: 'flex-start',
-    top:10
+    
   },
   button: {
-    backgroundColor: '#8AF3FF',
+    backgroundColor: '#454b66',
     borderRadius: 20,
     padding: 10,
     shadowColor: '#303838',
@@ -64,23 +64,27 @@ const styles = StyleSheet.create({
   },
   title:{
     fontSize:70,
-    top: -130,
+    top: -137,
     left: 120,
+    color: '#6974c9'
     
     
+  },
+  aboutMe:{
+    backgroundColor: '#454b66',
   },
   name:{
     fontSize: 65,
     top: 149,
     transform: [{ rotate: '-90deg' }],
-    right: 65
-    
+    right: 65,
+    color:'#6974c9'
   },
   stuNumber:{
     fontSize: 30,
     bottom: 398,
     left: 218,
-    
+    color:'#6974c9'
     
   },
   me:{
@@ -88,6 +92,7 @@ const styles = StyleSheet.create({
     height: 326,
     left: 225,
     bottom: 38,
+    color:'#636c92'
     
 
   },

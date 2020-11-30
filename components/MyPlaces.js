@@ -1,94 +1,117 @@
-import { Left } from 'native-base';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
-  Button,
   Image,
   TouchableOpacity,
-  FlatList,
-  TextInput,
-  
+  Button,
 } from 'react-native';
+import {Header} from 'react-native/Libraries/NewAppScreen';
 
-import MyPlaceInsert from './InsertMyPlace'
-import MyPlaceList from './MyPlaceList'
+import MyPlaceInsert from './AddNewPlace';
 
+import MyPlaceList from './ListAllPlaces.js';
 
 const MyPlaces = ({navigation}) => {
+  // todos: {id: Number, textValue: string, checked: boolean }
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (text) => {
+    setTodos([
+      ...todos,
+      {id: Math.random().toString(), textValue: text, checked: false},
+    ]);
+  };
+
+  const onRemove = (id) => (e) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const onToggle = (id) => (e) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? {...todo, checked: !todo.checked} : todo,
+      ),
+    );
+  };
+  const Details = () => {
+    navigation.navigate('Details');
+  };
+
   return (
     <>
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={()=>{navigation.toggleDrawer();}}>
-          <Image source={require("../img/menu.png")} style={styles.menu}/>
+      <View style={styles.containerNav}>
+        <TouchableOpacity
+          style={styles.buttonNav}
+          onPress={() => {
+            navigation.toggleDrawer();
+          }}>
+          <Image source={require('../img/menu.png')} style={styles.menuNav} />
         </TouchableOpacity>
-        <Text style={styles.title}>My Places</Text>
+        <Text style={styles.header}>My Places</Text>
       </View>
-      
       <SafeAreaView style={styles.container}>
-      
-      <View style={styles.card}>
-        <MyPlaceList />
-        <MyPlaceInsert />
-      </View>
-    </SafeAreaView>
+        <View style={styles.card}>
+          <MyPlaceInsert onAddMyPlaces={addTodo} />
+          <MyPlaceList
+            myPlaces={todos}
+            onRemove={onRemove}
+            onToggle={onToggle}
+            Details={Details}
+          />
+        </View>
+      </SafeAreaView>
     </>
   );
 };
 
+export {MyPlaces};
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    alignItems: "flex-start",
-    top: 10,
+  containerNav: {
+    backgroundColor: '#454b66',
+    alignItems: 'flex-start',
   },
-  button: {
-    backgroundColor: '#8AF3FF',
+  header: {
+    left: 90,
+    bottom: 80,
+    fontSize: 65,
+    color:'#6974c9'
+
+  },
+  buttonNav: {
+    backgroundColor: '#454b66',
     borderRadius: 20,
     padding: 10,
     shadowColor: '#303838',
     shadowOffset: {width: 0, height: 5},
     shadowRadius: 10,
     shadowOpacity: 0.35,
+    top: 7,
   },
-  menu: {
+  menuNav: {
     width: 60,
     height: 60,
   },
-  title: {
-    color: 'black',
-    fontSize: 36,
-    marginTop: -65,
-    marginLeft: 125,
-    marginBottom: 30,
-    fontWeight: '300',
-    textAlign: 'center',
-    
-  },
-  card: {
-    
+
+  container: {
     flex: 1,
+    backgroundColor: '#454b66',
+  },
+
+  card: {
+    backgroundColor: '#454b66',
+    flex: 1,
+    bottom: 10, 
     borderTopLeftRadius: 10, // to provide rounded corners
     borderTopRightRadius: 10, // to provide rounded corners
     marginLeft: 10,
     marginRight: 10,
-    width: 300
-    
   },
-  input: {
-    padding: 20,
-    borderBottomColor: '#bbb',
-    borderBottomWidth: 1,
-    fontSize: 24,
-    marginLeft: 10,
-    top: -30
-  },
- 
 });
 
-export {MyPlaces};
+export default MyPlaces;

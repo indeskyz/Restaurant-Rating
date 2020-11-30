@@ -19,7 +19,6 @@ import {NavigationContainer, StackActions} from '@react-navigation/native';
 const HomeScreen = ({navigation}) => {
   return (
     <>
-      
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
@@ -29,8 +28,9 @@ const HomeScreen = ({navigation}) => {
           <Image source={require('../img/menu.png')} style={styles.menu} />
         </TouchableOpacity>
         <View>
-        <Text style={styles.header}>Dining Diary</Text>
-      </View>
+          <Text style={styles.header}>Dining</Text>
+          <Text style={styles.subHeader}>Diary</Text>
+        </View>
       </View>
       <View>
         <Image source={require('../img/logo.png')} style={styles.logo} />
@@ -42,12 +42,11 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#454b66',
     alignItems: 'flex-start',
-    top:10
   },
   button: {
-    backgroundColor: '#8AF3FF',
+    backgroundColor: '#454b66',
     borderRadius: 20,
     padding: 10,
     shadowColor: '#303838',
@@ -60,16 +59,23 @@ const styles = StyleSheet.create({
     height: 60,
   },
   header: {
-    marginLeft: 110,
-    fontSize: 45,
-    top:-80
+    left:125,
+    fontSize: 70,
+    bottom: 85,
+    color: '#6974c9',
   },
-  logo:{
-    bottom: 10,
-    right:20,
+  subHeader: {
+    left: 140,
+    fontSize: 70,
+    bottom: 100,
+    color: '#6974c9',
+  },
+  logo: {
+    right: 20,
     width: 450,
-    height: 450
-  }
+    height: 450,
+    backgroundColor: '#454b66',
+  },
 });
 
 export {HomeScreen};
