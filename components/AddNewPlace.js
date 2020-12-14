@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import {Button, StyleSheet, TextInput, View} from 'react-native';
 
 const InsertMyPlace = ({onAddMyPlaces}) => {
-  const [newTodoItem, setNewTodoItem] = useState('');
+  const [newMyPlaceItem, setNewMyPlaceItem] = useState('');
 
-  const todoInputHandler = newTodo => {
-    setNewTodoItem(newTodo);
+  const MyPlaceInputHandler = newMyPlace => {
+    setNewMyPlaceItem(newMyPlace);
   };
 
-  const addTodoHandler = () => {
-    onAddMyPlaces(newTodoItem);
-    setNewTodoItem('');
+  const addMyPlaceHandler = () => {
+    onAddMyPlaces(newMyPlaceItem);
+    setNewMyPlaceItem('');
   };
 
   return (
@@ -18,13 +18,13 @@ const InsertMyPlace = ({onAddMyPlaces}) => {
       <TextInput
         style={styles.input}
         placeholder="New Place"
-        value={newTodoItem}
-        onChangeText={todoInputHandler}
+        value={newMyPlaceItem}
+        onChangeText={MyPlaceInputHandler}
         placeholderTextColor={'#b9aaa2'}
         autoCorrect={false}
       />
       <View style={styles.button}>
-        <Button title={'ADD'} onPress={addTodoHandler} />
+        <Button title={'ADD'} onPress={addMyPlaceHandler} />
       </View>
     </View>
   );

@@ -1,26 +1,15 @@
-import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Button,
-} from 'react-native';
-
-import {NavigationContainer} from '@react-navigation/native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View, Button} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {AirbnbRating} from 'react-native-ratings';
-import MapView, {Marker} from 'react-native-maps';
+import AsyncStorage from '@react-native-community/async-storage';
+import MapView from 'react-native-maps';
 
 const Details = ({navigation}) => {
-  const [region, setRegion] = useState({
-    latitude: 51.5079145,
-    longitude: -0.0899163,
-    latitudeDelta: 0.01,
-    longitudeDelta: 0.01,
-  });
+  const [address, setAddress] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [description, setDescription] = useState('');
+  const [tags, setTags] = useState('');
 
   return (
     <>
@@ -30,6 +19,8 @@ const Details = ({navigation}) => {
           placeholder="Add Address "
           placeholderTextColor={'#b9aaa2'}
           autoCorrect={false}
+          onChangeText={(address) => setAddress(address)}
+          defaultValue={address}
         />
         <TextInput
           style={styles.TextInput}
@@ -37,28 +28,29 @@ const Details = ({navigation}) => {
           keyboardType="number-pad"
           placeholderTextColor={'#b9aaa2'}
           autoCorrect={false}
+          onChangeText={(phoneNumber) => setPhoneNumber(phoneNumber)}
+          defaultValue={phoneNumber}
         />
         <TextInput
           style={styles.TextInput}
           placeholder="Description"
           placeholderTextColor={'#b9aaa2'}
           autoCorrect={false}
+          onChangeText={(description) => setDescription(description)}
+          defaultValue={description}
         />
         <TextInput
           style={styles.TextInput}
           placeholder="Tags"
           placeholderTextColor={'#b9aaa2'}
           autoCorrect={false}
+          onChangeText={(tags) => setTags(tags)}
+          defaultValue={tags}
         />
 
         <AirbnbRating ratingCount={5} size={45} reviewColor="black" />
       </View>
-      <MapView
-        style={{flex: 2}}
-        initalRegion={region}
-        onRegionChangeComplete={(region) => setRegion(region)}>
-        <Marker coordinate={{latitude: 51.5078788, longitude: -0.0877321}} />
-      </MapView>
+      <MapView showsUserLocation={true} style={{flex: 2}}></MapView>
       <Button
         title="Return"
         color="#c2847a"
@@ -74,9 +66,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#454b66',
   },
-  TextInput:{
-    fontSize: 25
-  }
+  TextInput: {
+    fontSize: 25,
+  },
 });
 
 export {Details};

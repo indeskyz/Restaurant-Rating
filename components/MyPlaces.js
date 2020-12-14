@@ -1,5 +1,3 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import React, {useState} from 'react';
 import {
   SafeAreaView,
@@ -8,33 +6,30 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Button,
 } from 'react-native';
-import {Header} from 'react-native/Libraries/NewAppScreen';
 
 import MyPlaceInsert from './AddNewPlace';
 
 import MyPlaceList from './ListAllPlaces.js';
 
 const MyPlaces = ({navigation}) => {
-  // todos: {id: Number, textValue: string, checked: boolean }
-  const [todos, setTodos] = useState([]);
+  const [myPlace, setMyPlace] = useState([]);
 
-  const addTodo = (text) => {
-    setTodos([
-      ...todos,
+  const addPlace = (text) => {
+    setMyPlace([
+      ...myPlace,
       {id: Math.random().toString(), textValue: text, checked: false},
     ]);
   };
 
   const onRemove = (id) => (e) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setMyPlace(myPlace.filter((place) => place.id !== id));
   };
 
   const onToggle = (id) => (e) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? {...todo, checked: !todo.checked} : todo,
+    setMyPlace(
+      myPlace.map((place) =>
+        place.id === id ? {...place, checked: !place.checked} : place,
       ),
     );
   };
@@ -56,9 +51,9 @@ const MyPlaces = ({navigation}) => {
       </View>
       <SafeAreaView style={styles.container}>
         <View style={styles.card}>
-          <MyPlaceInsert onAddMyPlaces={addTodo} />
+          <MyPlaceInsert onAddMyPlaces={addPlace} />
           <MyPlaceList
-            myPlaces={todos}
+            myPlaces={myPlace}
             onRemove={onRemove}
             onToggle={onToggle}
             Details={Details}
@@ -80,8 +75,7 @@ const styles = StyleSheet.create({
     left: 90,
     bottom: 80,
     fontSize: 65,
-    color:'#6974c9'
-
+    color: '#6974c9',
   },
   buttonNav: {
     backgroundColor: '#454b66',
@@ -106,7 +100,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#454b66',
     flex: 1,
-    bottom: 10, 
+    bottom: 10,
     borderTopLeftRadius: 10, // to provide rounded corners
     borderTopRightRadius: 10, // to provide rounded corners
     marginLeft: 10,

@@ -1,22 +1,12 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  Button,
-  Alert,
-} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const TodoListItem = ({
   textValue,
   id,
   onRemove,
-  onToggle,
   Details,
-  navigation,
 }) => {
   return (
     <>

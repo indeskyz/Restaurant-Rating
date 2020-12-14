@@ -1,20 +1,5 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Button,
-  Image,
-  TouchableOpacity,
-  Header,
-} from 'react-native';
-
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {color} from 'react-native-reanimated';
-import {NavigationContainer, StackActions} from '@react-navigation/native';
+import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 
 const HomeScreen = ({navigation}) => {
   return (
@@ -59,7 +44,7 @@ const styles = StyleSheet.create({
     height: 60,
   },
   header: {
-    left:125,
+    left: 125,
     fontSize: 70,
     bottom: 85,
     color: '#6974c9',
